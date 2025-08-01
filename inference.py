@@ -3,7 +3,6 @@ import torch.nn as nn
 import numpy as np
 import os, sys
 from pathlib import Path
-sys.path.append("/data1/hxf/neuro-3D-main/")
 from contextlib import nullcontext
 from accelerate import Accelerator
 from train_utils.parse import parse_args
