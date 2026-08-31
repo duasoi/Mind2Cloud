@@ -26,19 +26,17 @@ class TrainState:
     best_val: Optional[float] = None
 
 
-
-def get_optimizer(args, model: torch.nn.Module) -> torch.optim.Optimizer:
+def get_optimizer(args, model: torch.nn.Module, accelerator: Optional[Accelerator] = None) -> torch.optim.Optimizer:
     """Gets optimizer from config"""
-
+    
     lr = args.lr
-    print(f'lr = {lr} (absolute learning rate)')
+    print('lr = {lr} (absolute learning rate)'.format(lr=lr))
 
     # Get optimizer parameters, excluding certain parameters from weight decay
     no_decay = ["bias", "LayerNorm.weight"]
     parameters = [
         {
-            "params": [p for n, p in model.named_parameters() if
-                       p.requires_grad and not any(nd in n for nd in no_decay)],
+            "params": [p for n, p in model.named_parameters() if p.requires_grad and not any(nd in n for nd in no_decay)],
             "weight_decay": args.weight_decay,
         },
         {
@@ -46,7 +44,7 @@ def get_optimizer(args, model: torch.nn.Module) -> torch.optim.Optimizer:
             "weight_decay": 0.0,
         },
     ]
-    Optimizer = torch.optim.AdamW
+    Optimizer: torch.optim.Optimizer = getattr(torch.optim, 'AdamW')
     optimizer = Optimizer(parameters, lr=lr, betas=(0.95, 0.999))
 
     return optimizer

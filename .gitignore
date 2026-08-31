@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.env
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Build artifacts
+build/
+dist/
+*.so
+*.dll
+*.dylib
+*.egg
+
+# Datasets and generated artifacts
+EEG_3Datasets/
+data/
+datasets/
+logs/
+outputs/
+neuro3d_result/
+PointCNN/outputs/
+PointCNN/pkl/
+
+# Model weights and experiment files
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.npy
+*.npz
+*.ply
+*.pcd
+*.obj
+*.tar
+*.tar.gz
+*.zip
+
+# System/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

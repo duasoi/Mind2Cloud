@@ -7,15 +7,15 @@ import numpy as np
 import sys
 
 sys.path.append('.')
-# import sys
-# sys.path.append('/data2/hxf/neuro-3D-main/itrans_model/')
-from eeg_data_process.clip_loss import ClipLoss
+
+from eeg_data_process.clip_loss import ClipLoss, SoftCLIPLoss, nt_xent_loss
 
 
 def set_seed(seed):
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
     np.random.seed(seed)
+
 
 
 class PositionalEncoding(nn.Module):
@@ -38,7 +38,7 @@ class PositionalEncoding(nn.Module):
         return x
 
 
-class EEGAttention(nn.Module):
+class EEGAttention(nn.Module):  ### 时间维度上的attention
     def __init__(self, channel, d_model, nhead, max_len=600):
         super(EEGAttention, self).__init__()
         self.pos_encoder = PositionalEncoding(d_model, max_len=max_len)
@@ -174,6 +174,8 @@ class VideoImageEEGClassifyColor3(nn.Module):
 
         self.logit_scale = nn.Parameter(torch.ones([]) * np.log(1 / 0.01))
         self.loss_func = ClipLoss()
+        self.loss_func_1 = SoftCLIPLoss()
+        # self.contrastive_loss = nt_xent_loss()
 
     def forward(self, x, x2):
         dyn = self.attention_model(x)  # class EEGAttention
@@ -206,6 +208,8 @@ class VideoImageEEGClassifyColor3(nn.Module):
         # print(f'After temporal aggregation shape: {x_tem.shape}') # ([128, 1024, 1])
 
         clip_out = self.clip_head2(x_tem)  # class MLPHead
+
+        # cls_result = self.class_head2(clip_out)
 
         return clip_out
 

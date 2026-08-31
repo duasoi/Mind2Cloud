@@ -1,8 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch_geometric.nn import knn_graph, EdgeConv
-from torch_geometric.nn import global_max_pool
+
 class PointCloudDiscriminator(nn.Module):
     def __init__(self, input_dim=3):
         super(PointCloudDiscriminator, self).__init__()
@@ -25,6 +24,7 @@ class PointCloudDiscriminator(nn.Module):
         x = self.leaky_relu(self.fc1(x))
         x = self.fc2(x)  # [B, 1]
         return x
+
 class ImprovedPointCloudDiscriminator(nn.Module):
     def __init__(self, input_dim=3):
         super(ImprovedPointCloudDiscriminator, self).__init__()
@@ -78,7 +78,6 @@ class ImprovedPointCloudDiscriminator(nn.Module):
         x = self.conv4(x)
         x = self.global_pool(x).squeeze(-1)  # [B, 512]
         return self.fc(x)
-
 
 class ResBlock1D(nn.Module):
     def __init__(self, in_channels, out_channels):

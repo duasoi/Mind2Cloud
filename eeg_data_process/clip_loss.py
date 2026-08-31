@@ -186,3 +186,40 @@ class InfoNCELoss(torch.nn.Module):
         labels = torch.arange(similarity_matrix.size(0)).to(similarity_matrix.device)  # 正样本标签
         loss = F.cross_entropy(similarity_matrix, labels)
         return loss
+
+
+def nt_xent_loss(f_eeg, f_pc, temperature=0.1):
+    """
+    NT-Xent (Normalized Temperature-scaled Cross Entropy Loss) for EEG and PointCloud features.
+
+    Args:
+        f_eeg: [B, D] EEG feature embedding
+        f_pc:  [B, D] Point cloud feature embedding
+        temperature: Temperature scaling factor
+
+    Returns:
+        Contrastive loss scalar
+    """
+    B = f_eeg.shape[0]
+    f_eeg = F.normalize(f_eeg, dim=1)  # [B, D]
+    f_pc = F.normalize(f_pc, dim=1)  # [B, D]
+
+
+    sim_pos = torch.sum(f_eeg * f_pc, dim=1, keepdim=True)  # [B, 1]
+
+
+    sim_matrix = torch.matmul(f_eeg, f_pc.T)  # [B, B]
+
+
+    logits = sim_matrix / temperature
+    labels = torch.arange(B).to(f_eeg.device)
+
+
+    loss_eeg_to_pc = F.cross_entropy(logits, labels)
+
+
+    logits_T = sim_matrix.T / temperature
+    loss_pc_to_eeg = F.cross_entropy(logits_T, labels)
+
+
+    return (loss_eeg_to_pc + loss_pc_to_eeg) / 2
