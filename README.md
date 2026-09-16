@@ -9,7 +9,7 @@
 ![PyTorch](https://img.shields.io/badge/Framework-PyTorch-EE4C2C?logo=pytorch&logoColor=white)
 ![GPU](https://img.shields.io/badge/Verified-Tesla_V100-76B900?logo=nvidia&logoColor=white)
 
-[**Paper**](#project-links) ·
+[**Paper**](https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/14635.pdf) ·
 [**Code**](https://github.com/duasoi/Mind2Cloud) ·
 [**Dataset**](#dataset) ·
 [**Training**](#quick-start) ·
@@ -49,7 +49,7 @@ Therefore, both training and inference in the current version require:
 
 | Resource | Link |
 | :--- | :--- |
-| Paper | **TODO: paper link** |
+| Paper | [PDF](https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/14635.pdf) |
 | Code repository | [https://github.com/duasoi/Mind2Cloud](https://github.com/duasoi/Mind2Cloud) |
 | Dataset | [Baidu Netdisk](https://pan.baidu.com/s/1_DfNgEw7cPMrW7ZKh3xxoQ?pwd=oa51) (access code: `oa51`) |
 | Pretrained checkpoints | **TODO: checkpoint link** |
