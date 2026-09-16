@@ -2,7 +2,7 @@
 
 # Mind2Cloud: EEG-to-3D Point Cloud Generation with Diffusion Models
 
-**Mind2Cloud: An EEG-to-3D point cloud generation framework with diffusion decoding. Official code for EEG-based neural decoding and brain-driven 3D reconstruction.**
+**Official implementation of: "Mind2Cloud: EEG-to-Point Cloud Generation with Two-Granularity Diffusion Decoding"**
 
 [![Repository](https://img.shields.io/badge/GitHub-Mind2Cloud-181717?logo=github&logoColor=white)](https://github.com/duasoi/Mind2Cloud)
 ![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white)
@@ -16,8 +16,6 @@
 [**Inference**](#inference)
 
 </div>
-
-> This README is intended for first-time users. Follow it from top to bottom to configure the environment, prepare the data, train the model, monitor logs, run inference, and save results.
 
 ## Overview
 
